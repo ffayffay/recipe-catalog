@@ -72,11 +72,13 @@ function createTemplate(array) {
 	let template = `
 		<div class="recipe">
 			<div class="recipe-img">
+				<i class="fas fa-angle-left"></i>
 				<img src="${array.image}">
-			</div>
-			<div class="recipe-title photo-overlay">
+				<i class="fas fa-angle-right"></i>
+				<div class="recipe-title photo-overlay">
 				<a href="${array.link}">
 				<h3>${array.title}</h3>
+			</div>
 			</div>
 		</div>
 	`
