@@ -12,7 +12,7 @@ html,
 }
 
 body {
-	padding-top: 17%;
+	padding-top: 10%;
 }
 
 .site-wrap {
@@ -53,9 +53,9 @@ button {
 }
 
 .gallery-wrap {
+	overflow-x: scroll;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	min-height: 85vh;
 	width: 100vw;
@@ -64,22 +64,17 @@ button {
 
 .recipe {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
 	align-items: center;
-	text-align: center;
-	margin-top: 150px;
-	background-color: #db8fa5;
-	border: 8px solid #75293f;
-	height: 1020px;
-    width: 800px;
-    box-shadow: 5px 10px 18px #888888;
+    justify-content: center;
+    margin: 50px;
+	position: relative;
+	height: 100vh;
+	width: 100vw;
 }
 
 .recipe-img {
-	height: 550px;
-	width: 500px;
-	border: 6px solid #f3d9e1;
+	height: 80vh;
+	width: 90vw;
 }
 
 img {
@@ -99,3 +94,29 @@ h3 {
 .recipe-title {
 	font-size: 1.25em;
 }
+
+.photo-overlay {
+	color: #fff;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0; 
+	left: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0,0,0, .65);
+}
+
+.photo-overlay {
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: .2s;
+}
+.photo-overlay:hover {
+	opacity: 1;
+}
+
