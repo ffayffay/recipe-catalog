@@ -67,28 +67,82 @@ let recipes = [
 	}
 ]
 
+// gallery^^^^
+// user should be able to click next or prev and view the next image
+// user should be able to view one image at a time
+// user should be able to click on image to visit website
 
-function createTemplate(array) {
-	let template = `
-		<div class="recipe">
-			<div class="recipe-img">
-				<i class="fas fa-angle-left"></i>
-				<img src="${array.image}">
-				<i class="fas fa-angle-right"></i>
-				<div class="recipe-title photo-overlay">
-				<a href="${array.link}">
-				<h3>${array.title}</h3>
-			</div>
-			</div>
-		</div>
-	`
-	return template
-} 
+let currentRecipeIndex = 0;
+let currentRecipe = recipes[currentRecipeIndex];
 
-function insertHtml(array) {
-	for(let i = 0; i < array.length; i++) {
-		galleryWrap.insertAdjacentHTML("beforeend", createTemplate(array[i]))
+function nextArrow() {
+	if (currentRecipeIndex > recipes.length) {
+		currentRecipeIndex = 0
+	}else {
+		currentRecipeIndex += 1;
 	}
+	currentRecipe = recipes[currentRecipeIndex]
+	renderGallery(currentRecipe)
 }
 
-insertHtml(recipes)
+function prevArrow() {
+	if (currentRecipeIndex <= 0) {
+		currentRecipeIndex = 0
+	} else{
+		currentRecipeIndex -= 1;
+	}
+	currentRecipe = recipes[currentRecipeIndex]
+	renderGallery(currentRecipe)
+}
+
+function renderGallery(currentRecipe) {
+	const template = `
+	<div class="recipe">
+		<div onclick="prevArrow()">
+			<i class="fas fa-angle-left"></i>
+		</div>
+		<div class="recipe-body">
+			<div class="recipe-img">
+				<img src="${currentRecipe.image}">
+			</div>
+			<div class="recipe-title photo-overlay">
+					<a href="${currentRecipe.link}">
+						${currentRecipe.title}
+					</a>
+			</div>
+		</div>
+		<div onclick="nextArrow()">
+			<i class="fas fa-angle-right"></i>
+		</div>
+	</div>
+	`
+
+
+	galleryWrap.innerHTML = template
+}
+renderGallery(currentRecipe)
+
+// function createTemplate(array) {
+// 	let template = `
+// 		<div class="recipe">
+// 			<i class="fas fa-angle-left"></i>
+// 			<div class="recipe-img">
+// 				<img src="${array.image}">
+// 				<div class="recipe-title photo-overlay">
+// 				<a href="${array.link}">
+// 				<h3>${array.title}</h3>
+// 			</div>
+// 			<i class="fas fa-angle-right"></i>
+// 			</div>
+// 		</div>
+// 	`
+// 	return template
+// } 
+
+// function insertHtml(array) {
+// 	for(let i = 0; i < array.length; i++) {
+// 		galleryWrap.insertAdjacentHTML("beforeend", createTemplate(array[i]))
+// 	}
+// }
+
+// insertHtml(recipes)
