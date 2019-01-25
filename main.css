@@ -23,7 +23,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	background-color: #622234;
+	background: linear-gradient(to top, #ee0979, #ff6a00);
 	height: 15vh;
 	width: 100vw;
 	z-index: 1000;
@@ -50,8 +50,10 @@ button {
 
 .gallery-wrap {
 	display: flex;
+	flex-direction: column;
     justify-content: center;
     min-height: 85vh;
+    text-align: center;
 }
 
 .recipe {
@@ -75,7 +77,7 @@ img {
 	width: 100%;
 }
 
-a {
+.photo-overlay a {
 	text-decoration: none;
 	font-weight: bold;
 	color: white;
@@ -105,4 +107,17 @@ a {
 
 .photo-overlay:hover {
 	opacity: 1;
+}
+/*---------------------------------------------------------------------*/
+
+.list-view-wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 125px;
+}
+
+.list-view-wrap a {
+	text-decoration: none;
+	font-weight: bold;
 }

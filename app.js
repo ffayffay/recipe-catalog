@@ -76,7 +76,7 @@ let currentRecipeIndex = 0;
 let currentRecipe = recipes[currentRecipeIndex];
 
 function nextArrow() {
-	if (currentRecipeIndex > recipes.length) {
+	if (currentRecipeIndex > recipes.length - 1) {
 		currentRecipeIndex = 0
 	}else {
 		currentRecipeIndex += 1;
@@ -87,7 +87,7 @@ function nextArrow() {
 
 function prevArrow() {
 	if (currentRecipeIndex <= 0) {
-		currentRecipeIndex = 0
+		currentRecipeIndex = recipes.length - 1
 	} else{
 		currentRecipeIndex -= 1;
 	}
@@ -99,7 +99,7 @@ function renderGallery(currentRecipe) {
 	const template = `
 	<div class="recipe">
 		<div onclick="prevArrow()">
-			<i class="fas fa-angle-left"></i>
+			<i class="fas fa-angle-left fa-3x"></i>
 		</div>
 		<div class="recipe-body">
 			<div class="recipe-img">
@@ -112,7 +112,7 @@ function renderGallery(currentRecipe) {
 			</div>
 		</div>
 		<div onclick="nextArrow()">
-			<i class="fas fa-angle-right"></i>
+			<i class="fas fa-angle-right fa-3x"></i>
 		</div>
 	</div>
 	`
@@ -122,27 +122,46 @@ function renderGallery(currentRecipe) {
 }
 renderGallery(currentRecipe)
 
-// function createTemplate(array) {
-// 	let template = `
-// 		<div class="recipe">
-// 			<i class="fas fa-angle-left"></i>
-// 			<div class="recipe-img">
-// 				<img src="${array.image}">
-// 				<div class="recipe-title photo-overlay">
-// 				<a href="${array.link}">
-// 				<h3>${array.title}</h3>
-// 			</div>
-// 			<i class="fas fa-angle-right"></i>
-// 			</div>
-// 		</div>
-// 	`
-// 	return template
-// } 
+// user inputs recipe name they would like to search for
+// user clicks the search button and is taken to the searched recipe
 
-// function insertHtml(array) {
-// 	for(let i = 0; i < array.length; i++) {
-// 		galleryWrap.insertAdjacentHTML("beforeend", createTemplate(array[i]))
-// 	}
-// }
 
-// insertHtml(recipes)
+
+let searchBtn = document.querySelector('.search-btn');
+// let searchInput = document.getElementById("search-input").value
+
+searchBtn.addEventListener("click", e => renderListView(e))
+
+
+
+
+function matchSearch(array) {
+	const searchInput = document.getElementById("search-input").value
+	
+	const filterTitles = i => i.title.toLowerCase().includes(searchInput.toLowerCase()) 
+	const searchedRecipe = recipes.filter(filterTitles)
+		return searchedRecipe
+}
+
+//list view detailed view gallery view
+
+function createListTemplate(searchResult) {
+	const template = `
+	<div class="list-view-wrap">
+		<a href="${searchResult.link}">
+			${searchResult.title}
+		</a>
+	</div>
+	`
+	galleryWrap.insertAdjacentHTML("beforeend", template)
+}
+
+function renderListView(searchResult) {
+	searchResult = matchSearch(recipes)
+	console.log(searchResult)
+	galleryWrap.innerHTML = "";
+	searchResult.forEach(i => createListTemplate(i))
+	
+}
+
+
